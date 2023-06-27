@@ -17,7 +17,15 @@ with open(infile) as csv_file:
         candidates[candidate] = candidates.get(candidate, 0) +1
 
 #The percentage of votes each candidate won
-
+out_print = []
+for candidate in candidates:
+        vote_percentage = round((candidates[candidate] / total_count) * 100,2)
+        candidate_name = candidate
+        total_ballots = candidates[candidate]
+        out_str = f"{candidate_name}: {vote_percentage}% ({total_ballots})"
+        out_print.append(out_str)
+#The winner of the election based on popular vote
+winner = max(candidates, key = candidates.get)
  
 with open(outfile, "w") as txt_file:
 
@@ -26,6 +34,11 @@ with open(outfile, "w") as txt_file:
         f"----------------------------\n"
         f"Total Votes: {total_count}\n"
         f"Total Candidates {candidates}"
+        f"{out_print[0]}"
+        f"{out_print[1]}"
+        f"{out_print[2]}"
+        f"----------------------------\n"
+        f"Winner: {winner}\n"
     )
 
     print(output)
